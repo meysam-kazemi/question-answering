@@ -15,11 +15,7 @@ def load_the_dataset(config):
     for load dataset locally
     Let’s assume the data is in JSON format.
     """
-    try:
-        path = config["dataset"]['path']
-    except:
-        red_print("[Config Error!] load_the_dataset")
-        return False
+    path = config["dataset"]['path']
     try:
         return load_dataset(path)
     except:
