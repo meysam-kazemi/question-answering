@@ -21,8 +21,11 @@ class modelAndTokenizer:
         # Load the model and tokenizer
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
+            device_map="auto"
         )
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.model_name
+        )
 
         print(f"\nModel and tokenizer for '{self.model_name}' loaded.")
 
