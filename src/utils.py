@@ -1,7 +1,7 @@
 import os
 import configparser
 
-def read_config(config_file='config.ini'):
+def read_config(config_file='config/config.ini'):
     """
     Reads the configuration file and returns the settings as a dictionary.
 
