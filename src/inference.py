@@ -3,7 +3,7 @@ import sys
 import argparse
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.model_and_tokenizer import modelAndTokenizer
-from src.utils import read_config, red_print, chatQwen
+from src.utils import read_config, chatQwen
 
 class inference:
     def __init__(self, model, tokenizer):
