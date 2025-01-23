@@ -6,8 +6,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.utils import read_config, red_print
 
 class modelAndTokenizer:
-    def __init__(self, config):
-        self.model_name = config['model']['model_name']
+    def __init__(self, config, inference=False):
+        if inference:
+            self.model_name = config['inference']['best_model']
+        else:
+            self.model_name = config['model']['model_name']
 
     try:
         self._load_and_model_and_tokenizer()
