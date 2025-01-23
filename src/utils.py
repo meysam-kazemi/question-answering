@@ -37,25 +37,17 @@ def red_print(text):
     print(f"{RED}{text}{RESET}")
 
 
+class chatQwen:
+    def __init__(self, model, tokenizer):
+        self.model = model
+        self.tokenizer = tokenizer
+        prompt = "You are Qwen, created by Alibaba Cloud. \
+            You are a helpful assistant."
+        self.history = None
+        self.__call__(prompt)
 
-def chat(prompt, message, tokenizer):
-    prompt = "Give me a short introduction to large language model."
-    messages = [
-        {"role": "system", "content": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."},
-        {"role": "user", "content": prompt}
-    ]
-
-    text = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True
-    )
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-    generated_ids = model.generate(
-        **model_inputs,
-        max_new_tokens=512
-    )
-    generated_ids = [
-        output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
-    ]
-    response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+    def __call__(self, prompt):
+        response, self.history = self.model.chat(
+            self.tokenizer, prompt, history=None
+        )
+        return response
