@@ -41,13 +41,33 @@ class chatQwen:
     def __init__(self, model, tokenizer):
         self.model = model
         self.tokenizer = tokenizer
-        prompt = "You are Qwen, created by Alibaba Cloud. \
-            You are a helpful assistant."
-        self.history = None
+        prompt = "I want to improve the prompt. \
+            so just improve it and write the improved prompt."
+        self.messages = [
+            {"role": "system", "content": ""},
+        ]
+
         self.__call__(prompt)
 
     def __call__(self, prompt):
-        response, self.history = self.model.chat(
-            self.tokenizer, prompt, history=None
+        self.messages.append(
+            {"role": "user", "content": prompt}
+        )
+        text = self.tokenizer.apply_chat_template(
+            self.messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+        model_inputs = self.tokenizer([text], return_tensors="pt").to(self.model.device)
+        generated_ids = self.model.generate(
+            **model_inputs,
+            max_new_tokens=64
+        )
+        generated_ids = [
+            output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+        ]
+        response = self.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+        self.messages.append(
+            {'role':'system', 'content': response}
         )
         return response
