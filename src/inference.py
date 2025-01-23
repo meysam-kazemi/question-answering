@@ -28,6 +28,6 @@ if __name__=="__main__":
     config = read_config()
     mt = modelAndTokenizer(config, True)
     infer = inference(mt.model, mt.tokenizer)
-    prompt = ""
-    print(infer(prompt))
+    args = parse_arguments()
+    print(infer(args.prompt))
     
