@@ -17,7 +17,7 @@ args = TrainingArguments(
     num_train_epochs=int(config['train']['epoch']),
     weight_decay=float(config['train']['weight_decay']),
     fp16=True,
-    push_to_hub=True,
+    push_to_hub=False,
 )
 
 
