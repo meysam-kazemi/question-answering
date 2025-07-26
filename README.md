@@ -44,8 +44,3 @@ The script reads settings from config.ini, including the dataset path, model nam
 Trained model checkpoints are saved in the `models/ directory`.
 
 Ensure the best_model field in config.ini points to the trained model checkpoint.
------------------------
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-Contact
-For questions or feedback, open an issue on the repository or contact the maintainer.
