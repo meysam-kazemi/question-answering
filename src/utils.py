@@ -38,16 +38,12 @@ def red_print(text):
 
 
 class chatQwen:
-    def __init__(self, model, tokenizer):
+    def __init__(self, model, tokenizer, system_prompt="You are a helpful question-answering assistant."):
         self.model = model
         self.tokenizer = tokenizer
-        prompt = "I want to improve the prompt. \
-            so just improve it and write the improved prompt."
         self.messages = [
-            {"role": "system", "content": ""},
+            {"role": "system", "content": system_prompt},
         ]
-
-        self.__call__(prompt)
 
     def __call__(self, prompt):
         self.messages.append(
@@ -68,6 +64,6 @@ class chatQwen:
         ]
         response = self.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
         self.messages.append(
-            {'role':'system', 'content': response}
+            {'role': 'assistant', 'content': response}
         )
         return response
