@@ -6,7 +6,11 @@ from src.utils import read_config
 from src.model_and_tokenizer import modelAndTokenizer
 from data.load_data import load_the_dataset
 config = read_config()
-train_dataset, validation_dataset = load_the_dataset(config)
+dataset = load_the_dataset(config)
+if dataset is None:
+    raise RuntimeError("Failed to load the dataset. Check the path in config.ini.")
+train_dataset = dataset["train"]
+validation_dataset = dataset.get("validation")
 mt = modelAndTokenizer(config)
 
 args = TrainingArguments(
