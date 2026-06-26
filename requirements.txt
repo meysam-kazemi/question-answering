@@ -2,7 +2,7 @@ numpy==1.26.4
 tqdm==4.67.1
 torch==2.0.0
 datasets==3.2.0
-transformers==4.4.7.1
+transformers==4.47.1
 seqeval==1.2.2
 evaluate==0.4.3
 accelerate==1.2.1

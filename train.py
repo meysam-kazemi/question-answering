@@ -11,7 +11,7 @@ mt = modelAndTokenizer(config)
 
 args = TrainingArguments(
     config['train']['save_dir'],
-    evaluation_strategy="no",
+    eval_strategy="no",
     save_strategy="epoch",
     learning_rate=float(config['train']['learning_rate']),
     num_train_epochs=int(config['train']['epoch']),
