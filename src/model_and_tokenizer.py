@@ -7,15 +7,17 @@ from src.utils import read_config, red_print
 
 class modelAndTokenizer:
     def __init__(self, config, inference=False):
+        self.model = None
+        self.tokenizer = None
         if inference:
             self.model_name = config['inference']['best_model']
         else:
             self.model_name = config['model']['model_name']
 
-    try:
-        self._load_and_model_and_tokenizer()
-    except:
-        red_print("Loading model Failed!")
+        try:
+            self._load_and_model_and_tokenizer()
+        except Exception as error:
+            red_print(f"Loading model failed: {error}")
 
     def _load_and_model_and_tokenizer(self):
         """
